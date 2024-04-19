@@ -17,6 +17,9 @@ const buttonVariants = cva(
         secondary:
           'bg-green-500 text-primary-foreground hover:bg-green-500/90 border-green-600 border-b-4 active:border-b-0 ',
         secondaryOutline: 'bg-white text-green-500 hover:bg-slate-100',
+        danger:
+          'bg-rose-500 text-primary-foreground hover:bg-rose-500/90 border-rose-600 border-b-4 active:border-b-0 ',
+        dangerOutline: 'bg-white text-rose-500 hover:bg-slate-100',
       },
       size: {
         default: 'h-11 px-4 py-2',
