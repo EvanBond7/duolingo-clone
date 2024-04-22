@@ -4,6 +4,7 @@ import { courses, userProgress } from '@/db/schema';
 import { Card } from './card';
 import { useRouter } from 'next/navigation';
 import { useTransition } from 'react';
+import { upserUserProgress } from '@/actions/user-progress';
 
 type Props = {
   courses: (typeof courses.$inferSelect)[];
@@ -21,7 +22,9 @@ export const List = ({ courses, activeCourseId }: Props) => {
       return router.push('/learn');
     }
 
-    startTransition(() => {});
+    startTransition(() => {
+      upserUserProgress(id);
+    });
   };
 
   return (
@@ -32,8 +35,8 @@ export const List = ({ courses, activeCourseId }: Props) => {
           id={course.id}
           title={course.title}
           imageSrc={course.imageSrc}
-          onClick={() => {}}
-          disabled={false}
+          onClick={onClick}
+          disabled={pending}
           active={course.id === activeCourseId}
         />
       ))}
