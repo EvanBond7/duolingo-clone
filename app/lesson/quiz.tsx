@@ -3,6 +3,7 @@
 import { challengeOptions, challenges } from '@/db/schema';
 import { useState } from 'react';
 import { Header } from './header';
+import { QuestionBubble } from './question-bubble';
 
 type Props = {
   initialPercentage: number;
@@ -51,7 +52,11 @@ export const Quiz = ({
             <h1 className='text-lg lg:text-3xl text-center lg:text-start font-bold text-neutral-700'>
               {title}
             </h1>
-            <div>{/* {TODO: Challenge Component} */}</div>
+            <div>
+              {challenge.type === 'ASSIST' && (
+                <QuestionBubble question={challenge.question} />
+              )}
+            </div>
           </div>
         </div>
       </div>
