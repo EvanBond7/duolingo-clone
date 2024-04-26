@@ -7,7 +7,7 @@ type Props = {
   onCheck: () => void;
   status: 'correct' | 'wrong' | 'none' | 'completed';
   disabled?: boolean;
-  lessonId?: boolean;
+  lessonId?: number;
 };
 
 export const Footer = ({ status, onCheck, disabled, lessonId }: Props) => {
@@ -18,7 +18,7 @@ export const Footer = ({ status, onCheck, disabled, lessonId }: Props) => {
   return (
     <footer
       className={cn(
-        'lg:h[140px] h-[100px] border-t-2',
+        'lg:h-[140px] h-[100px] border-t-2',
         status === 'correct' && 'border-transparent bg-green-100',
         status === 'wrong' && 'border-transparent bg-rose-100'
       )}
@@ -41,7 +41,7 @@ export const Footer = ({ status, onCheck, disabled, lessonId }: Props) => {
           <Button
             variant={'default'}
             size={isMobile ? 'sm' : 'lg'}
-            onClick={() => (window.location.href = `/lesson${lessonId}`)}
+            onClick={() => (window.location.href = `/lesson/${lessonId}`)}
           >
             Practice again
           </Button>
