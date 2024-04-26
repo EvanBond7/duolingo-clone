@@ -88,7 +88,7 @@ export const challengeOptions = pgTable('challenge_options', {
     .notNull(),
   text: text('text').notNull(),
   correct: boolean('correct').notNull(),
-  imageScr: text('image_src'),
+  imageSrc: text('image_src'),
   audioSrc: text('audio_src'),
 });
 
