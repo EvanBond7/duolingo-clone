@@ -7,17 +7,17 @@ import { auth } from '@clerk/nextjs/server';
 import { and, eq } from 'drizzle-orm';
 import { revalidatePath } from 'next/cache';
 
-export const upserChallengeProgress = async (challengeId: number) => {
+export const upsertChallengeProgress = async (challengeId: number) => {
   const { userId } = await auth();
 
   if (!userId) {
     throw new Error('Unathorized');
   }
 
-  const currectUserProgress = await getUserProgress();
+  const currentUserProgress = await getUserProgress();
   // TODO Handle subscription query later
 
-  if (!currectUserProgress) {
+  if (!currentUserProgress) {
     throw new Error('User progress not found');
   }
 
@@ -41,7 +41,7 @@ export const upserChallengeProgress = async (challengeId: number) => {
   const isPractice = !!existingChallengeProgress;
 
   // TODO Not if user has a subscription
-  if (currectUserProgress.hearts === 0 && !isPractice) {
+  if (currentUserProgress.hearts === 0 && !isPractice) {
     return {
       error: 'hearts',
     };
@@ -58,8 +58,8 @@ export const upserChallengeProgress = async (challengeId: number) => {
     await db
       .update(userProgress)
       .set({
-        hearts: Math.min(currectUserProgress.hearts + 1, 5),
-        points: currectUserProgress.points + 10,
+        hearts: Math.min(currentUserProgress.hearts + 1, 5),
+        points: currentUserProgress.points + 10,
       })
       .where(eq(userProgress.userId, userId));
 
@@ -81,7 +81,7 @@ export const upserChallengeProgress = async (challengeId: number) => {
   await db
     .update(userProgress)
     .set({
-      points: currectUserProgress.points + 10,
+      points: currentUserProgress.points + 10,
     })
     .where(eq(userProgress.userId, userId));
 
