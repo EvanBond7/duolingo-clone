@@ -35,6 +35,7 @@ export const Quiz = ({
 }: Props) => {
   const { width, height } = useWindowSize();
   const router = useRouter();
+  const [finishAudio, _a] = useAudio({ src: '/finish.mp3', autoPlay: true });
   const [correctAudio, _c, correctControls] = useAudio({ src: '/correct.wav' });
   const [incorrectAudio, _ic, incorrectControls] = useAudio({
     src: '/incorrect.wav',
@@ -131,10 +132,10 @@ export const Quiz = ({
     }
   };
 
-  // TODO Remove true
-  if (true || !challenge) {
+  if (!challenge) {
     return (
       <>
+        {finishAudio}
         <Confetti
           recycle={false}
           numberOfPieces={500}
