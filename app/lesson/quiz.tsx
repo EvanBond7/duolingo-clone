@@ -10,6 +10,9 @@ import { upsertChallengeProgress } from '@/actions/challenge-progress';
 import { toast } from 'sonner';
 import { reduceHearts } from '@/actions/user-progress';
 import { useAudio } from 'react-use';
+import Image from 'next/image';
+import { ResultCard } from './result-card';
+import { useRouter } from 'next/navigation';
 
 type Props = {
   initialPercentage: number;
@@ -29,12 +32,13 @@ export const Quiz = ({
   initialLessonChallenges,
   userSubscription,
 }: Props) => {
+  const router = useRouter();
   const [correctAudio, _c, correctControls] = useAudio({ src: '/correct.wav' });
   const [incorrectAudio, _ic, incorrectControls] = useAudio({
     src: '/incorrect.wav',
   });
   const [pending, startTransition] = useTransition();
-
+  const [lessonId] = useState(initialLessonId);
   const [hearts, setHearts] = useState(initialHearts);
   const [percentage, setPercentage] = useState(() => {
     return initialPercentage === 100 ? 0 : initialPercentage;
@@ -124,6 +128,43 @@ export const Quiz = ({
       });
     }
   };
+
+  // TODO Remove true
+  if (true || !challenge) {
+    return (
+      <>
+        <div className='flex flex-col gap-y-4 lg:gap-y-8 max-w-lg mx-auto text-center items-center justify-center h-full'>
+          <Image
+            src={'/finish.svg'}
+            alt='Finish'
+            className='hidden lg:block'
+            height={100}
+            width={100}
+          />
+          <Image
+            src={'/finish.svg'}
+            alt='Finish'
+            className='block lg:hidden'
+            height={50}
+            width={50}
+          />
+          <h1 className='text-xl lg:text-3xl font-bold text-neutral-700'>
+            Great job! <br />
+            You've completed the lesson.
+          </h1>
+          <div className='flex items-center gap-x-4 w-full'>
+            <ResultCard variant='points' value={challenges.length * 10} />
+            <ResultCard variant='hearts' value={hearts} />
+          </div>
+        </div>
+        <Footer
+          lessonId={lessonId}
+          status='completed'
+          onCheck={() => router.push('/learn')}
+        />
+      </>
+    );
+  }
 
   const title =
     challenge.type === 'ASSIST'

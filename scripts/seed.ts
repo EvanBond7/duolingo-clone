@@ -202,6 +202,7 @@ const main = async () => {
         question: 'Which one of these is the "the robot"?',
       },
     ]);
+
     console.log('Seeding finished');
   } catch (error) {
     console.error(error);
