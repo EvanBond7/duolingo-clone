@@ -2,6 +2,7 @@
 
 import { challengeOptions, challenges } from '@/db/schema';
 import { useTransition, useState } from 'react';
+import Confetti from 'react-confetti';
 import { Header } from './header';
 import { QuestionBubble } from './question-bubble';
 import { Challenge } from './challenge';
@@ -9,7 +10,7 @@ import { Footer } from './footer';
 import { upsertChallengeProgress } from '@/actions/challenge-progress';
 import { toast } from 'sonner';
 import { reduceHearts } from '@/actions/user-progress';
-import { useAudio } from 'react-use';
+import { useAudio, useWindowSize } from 'react-use';
 import Image from 'next/image';
 import { ResultCard } from './result-card';
 import { useRouter } from 'next/navigation';
@@ -32,6 +33,7 @@ export const Quiz = ({
   initialLessonChallenges,
   userSubscription,
 }: Props) => {
+  const { width, height } = useWindowSize();
   const router = useRouter();
   const [correctAudio, _c, correctControls] = useAudio({ src: '/correct.wav' });
   const [incorrectAudio, _ic, incorrectControls] = useAudio({
@@ -133,6 +135,13 @@ export const Quiz = ({
   if (true || !challenge) {
     return (
       <>
+        <Confetti
+          recycle={false}
+          numberOfPieces={500}
+          tweenDuration={10000}
+          width={width}
+          height={height}
+        />
         <div className='flex flex-col gap-y-4 lg:gap-y-8 max-w-lg mx-auto text-center items-center justify-center h-full'>
           <Image
             src={'/finish.svg'}
