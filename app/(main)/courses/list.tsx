@@ -4,7 +4,7 @@ import { courses, userProgress } from '@/db/schema';
 import { Card } from './card';
 import { useRouter } from 'next/navigation';
 import { useTransition } from 'react';
-import { upserUserProgress } from '@/actions/user-progress';
+import { upsertUserProgress } from '@/actions/user-progress';
 import { toast } from 'sonner';
 
 type Props = {
@@ -24,7 +24,7 @@ export const List = ({ courses, activeCourseId }: Props) => {
     }
 
     startTransition(() => {
-      upserUserProgress(id).catch(() => toast.error('Something went wrong'));
+      upsertUserProgress(id).catch(() => toast.error('Something went wrong'));
     });
   };
 

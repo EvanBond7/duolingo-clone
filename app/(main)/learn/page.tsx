@@ -17,12 +17,12 @@ const LearnPage = async () => {
   const userProgressData = getUserProgress();
   const courseProgressData = getCourseProgress();
   const lessonPercentageData = getLessonPercentage();
-  const unitData = getUnits();
+  const unitsData = getUnits();
 
   const [userProgress, units, courseProgress, lessonPercentage] =
     await Promise.all([
       userProgressData,
-      unitData,
+      unitsData,
       courseProgressData,
       lessonPercentageData,
     ]);
