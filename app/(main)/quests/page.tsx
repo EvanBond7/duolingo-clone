@@ -1,6 +1,7 @@
 import FeedWrapper from '@/components/feed-wrapper';
 import { StickyWrapper } from '@/components/sticky-wrapper';
 import { Progress } from '@/components/ui/progress';
+import { Promo } from '@/components/ui/promo';
 import { UserProgress } from '@/components/user-progress';
 import { quests } from '@/constants';
 import { getUserProgress, getUserSubscription } from '@/db/queries';
@@ -20,6 +21,8 @@ const QuestsPage = async () => {
     redirect('/courses');
   }
 
+  const isPro = !!userSubscription?.isActive;
+
   return (
     <div className='flex flex-row-reverse gap-[48px] px-6'>
       <StickyWrapper>
@@ -27,8 +30,9 @@ const QuestsPage = async () => {
           activeCourse={userProgress.activeCourse}
           hearts={userProgress.hearts}
           points={userProgress.points}
-          hasActiveSubscription={!!userSubscription?.isActive}
+          hasActiveSubscription={isPro}
         />
+        {!isPro && <Promo />}
       </StickyWrapper>
       <FeedWrapper>
         <div className='w-full flex flex-col items-center'>

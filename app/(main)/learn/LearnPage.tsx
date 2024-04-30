@@ -13,9 +13,8 @@ import {
 import { redirect } from 'next/navigation';
 import { Unit } from './unit';
 import { lessons, units as unitsSchema } from '@/db/schema';
-import { Promo } from '@/components/ui/promo';
 
-const LearnPage = async () => {
+export const LearnPage = async () => {
   const userProgressData = getUserProgress();
   const courseProgressData = getCourseProgress();
   const lessonPercentageData = getLessonPercentage();
@@ -44,8 +43,6 @@ const LearnPage = async () => {
     redirect('/courses');
   }
 
-  const isPro = !!userSubscription?.isActive;
-
   return (
     <div className='flex flex-row-reverse gap-[48px] px-6'>
       <StickyWrapper>
@@ -55,7 +52,7 @@ const LearnPage = async () => {
           points={userProgress.points}
           hasActiveSubscription={!!userSubscription?.isActive}
         />
-        {!isPro && <Promo />}
+        <Promo />
       </StickyWrapper>
       <FeedWrapper>
         <Header title={userProgress.activeCourse.title} />
@@ -82,5 +79,3 @@ const LearnPage = async () => {
     </div>
   );
 };
-
-export default LearnPage;
