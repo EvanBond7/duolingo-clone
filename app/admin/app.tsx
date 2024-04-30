@@ -6,9 +6,9 @@ import { CourseList } from './course/list';
 import { CourseCreate } from './course/create';
 import { CourseEdit } from './course/edit';
 
-// import { UnitList } from './unit/list';
-// import { UnitEdit } from './unit/edit';
-// import { UnitCreate } from './unit/create';
+import { UnitList } from './unit/list';
+import { UnitEdit } from './unit/edit';
+import { UnitCreate } from './unit/create';
 
 // import { LessonList } from './lesson/list';
 // import { LessonEdit } from './lesson/edit';
@@ -34,14 +34,15 @@ const App = () => {
         edit={CourseEdit}
         recordRepresentation='title'
       />
-      {/* <Resource
-        name='units'
-        list={UnitList}
-        create={UnitCreate}
-        edit={UnitEdit}
-        recordRepresentation='title'
-      />
-      <Resource
+      {
+        <Resource
+          name='units'
+          list={UnitList}
+          create={UnitCreate}
+          edit={UnitEdit}
+          recordRepresentation='title'
+        />
+        /* <Resource
         name='lessons'
         list={LessonList}
         create={LessonCreate}
@@ -62,7 +63,8 @@ const App = () => {
         edit={ChallengeOptionEdit}
         recordRepresentation='text'
         options={{ label: 'Challenge Options' }}
-      /> */}
+      /> */
+      }
     </Admin>
   );
 };
