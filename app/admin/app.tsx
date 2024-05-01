@@ -48,7 +48,6 @@ const App = () => {
         edit={LessonEdit}
         recordRepresentation='title'
       />
-      /*{' '}
       <Resource
         name='challenges'
         list={ChallengeList}

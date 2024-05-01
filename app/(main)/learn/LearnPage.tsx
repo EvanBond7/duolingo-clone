@@ -13,6 +13,7 @@ import {
 import { redirect } from 'next/navigation';
 import { Unit } from './unit';
 import { lessons, units as unitsSchema } from '@/db/schema';
+import { Promo } from '@/components/ui/promo';
 
 export const LearnPage = async () => {
   const userProgressData = getUserProgress();
